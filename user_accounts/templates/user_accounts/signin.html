@@ -1,104 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
 
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
+/* Card */
+.login-card {
+  background: #fff;
+  width: 360px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Title */
+.login-title {
+  text-align: center;
+  padding: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  border-bottom: 1px solid #eee;
+}
+
+/* Inputs */
+input[type=text],
+input[type=password] {
+  width: 95%;
+  padding: 12px;
+  margin: 8px 0 16px 0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Buttons */
 button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
   width: 100%;
+  padding: 12px;
+  background: #04AA6D;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
 }
 
 button:hover {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .cancelbtn {
   width: auto;
-  padding: 10px 18px;
+  padding: 6px 14px;
+  font-size: 13px;
   background-color: #f44336;
 }
 
-.imgcontainer {
+/* Footer */
+.form-footer {
+  background: #f1f1f1;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.psw a {
+  font-size: 13px;
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.psw a:hover {
+  text-decoration: underline;
+}
+
+/* Remember me */
+.remember {
+  font-size: 13px;
+}
+
+/* Message */
+.error-msg {
+  color: red;
   text-align: center;
-  margin: 24px 0 12px 0;
-}
-
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
+  margin-bottom: 10px;
 }
 </style>
 </head>
+
 <body>
- {% if message %}
-    <p style="color:red">{{message}}</p>
+
+<div class="login-card">
+
+  <div class="login-title">Login</div>
+
+  <form method="post">
+    {% csrf_token %}
+
+    {% if message %}
+      <p class="error-msg">{{ message }}</p>
     {% endif %}
 
-<h2>Login Form</h2>
+    <div style="padding:20px">
 
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" required>
 
-<form method="post" style="border:1px solid #ccc">
-  <!-- <div class="imgcontainer">
-    <img src="img_avatar2.png" alt="Avatar" class="avatar">
-  </div> -->
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
 
-  <div class="container">
-    {% csrf_token %}
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+      <button type="submit">Login</button>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-        
-    <button type="submit">Login</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
+      <!-- <label class="remember">
+        <input type="checkbox" name="remember"> Remember me
+      </label> -->
 
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>
-</form>
+    </div>
 
-   
+    <div class="form-footer">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <span class="psw">
+        <a href="/user_accounts/forgot-password/" style="cursor:pointer;color:blue;">Forgot password?</a>
+      </span>
+    </div>
+
+  </form>
+</div>
+
 </body>
 </html>

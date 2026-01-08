@@ -91,5 +91,24 @@ def forgot_password(request):
         'message':message
     })    
           
+def reset_password(request):
+    message = ""
+    error = ""
+
+    if request.method == "POST":
+        new_password = request.POST.get("new_password")
+        confirm_password = request.POST.get("confirm_password")
+
+        if new_password != confirm_password:
+            error = "Passwords do not match"
+        elif not new_password:
+            error = "Password cannot be empty"
+        else:
+            # Example: assuming user is logged in and we use request.user
+            message = "Password reset successful"
+            return render(request, "user_accounts/reset_password.html", {"message": message})
+
+    return render(request, "user_accounts/reset_password.html", {"error": error})
+
           
          
