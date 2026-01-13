@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b5gk&sbuzv9)k55dy+o#7#*%!+dl!#2hwhc#yjq3yh3@ds6qxq'
+SECRET_KEY = 'v9x#mq2@8kp$r!n5jL&9*fT7wQ^3hE6yB!sD@pK8lM#2nO$9vX&5cR@7wT!3mJ'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'yourdomain.com']
 
 
 # Application definition
@@ -81,7 +81,7 @@ DATABASES = DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'banking_db',
         'USER': 'postgres',
-        'PASSWORD': 'omsairam',
+        'PASSWORD': 'welcome123',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -126,6 +126,29 @@ USE_TZ = True
 STATIC_URL = 'static/'
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# =========================
+# SECURITY SETTINGS
+# =========================
+
+# SSL/HTTPS Configuration
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+# Cookie Security
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = True
+
+# Additional Security Headers
+SECURE_CONTENT_SECURITY_POLICY = {
+    "default-src": ("'self'",),
+    "script-src": ("'self'",),
+    "style-src": ("'self'", "'unsafe-inline'"),
+}
 
 # # =========================
 # # EMAIL CONFIGURATION
